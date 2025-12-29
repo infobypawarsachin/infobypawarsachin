@@ -1,25 +1,27 @@
 # infobypawarsachin
-# 🍊 Saffron Village & Study Hub
-**Smart Digital Governance & Education Platform**
+# 🍊 Station Thanda - Saffron Village & Study Hub
+**గ్రామ అభివృద్ధి మరియు విద్యార్థుల సాధికారత కోసం ఒక డిజిటల్ వేదిక**
 
-Welcome to the **Saffron Village & Study Hub**, a specialized web platform designed for village administrators (Sarpanch/Ward members) and students. This project aims to digitize rural management while providing interactive tools for learning.
+**Station Thanda (స్టేషన్ తండా)** సర్పంచ్ వార్డ్ మరియు విద్యార్థుల కోసం ప్రత్యేకంగా రూపొందించబడిన వెబ్ ప్లాట్‌ఫాం. ఇది గ్రామ పాలనలో పారదర్శకతను మరియు విద్యార్థులకు డిజిటల్ లెర్నింగ్ టూల్స్‌ను అందిస్తుంది.
 
-## 🚀 Key Features
-- **Admin Dashboard:** Secure modules for Agriculture, Infrastructure, and Sanitation.
-- **Owner Control:** Protected by a secret password (**5292**) to manage notes and data.
-- **Interactive Study Hub:** A built-in **Drawing Rough Sheet** with Pencil and Eraser tools for students.
-- **Public Contributions:** Community members can upload photos and PDFs for village records.
-- **Auto-Updates:** Integrated Telugu news and development shorts.
-- **Watermarked Branding:** Official branding by **@infobypawarsachin**.
+## 🚀 ప్రధాన ఫీచర్లు (Key Features)
 
-## 🛠️ How to Use
-1. **Visitors:** Can view live updates, watch development videos, and upload supporting documents.
-2. **Students:** Click the "Open Drawing Sheet" in the Study Hub to solve problems with your finger or mouse.
-3. **Owner:** Click **Admin Login** at the top, enter password `5292`, and unlock the ability to write updates and delete old records.
+- **Station Thanda Branding:** స్టేషన్ తండా పేరుతో అధికారిక హెడర్ మరియు @infobypawarsachin వాటర్‌మార్క్.
+- **Interactive Study Hub:** విద్యార్థుల కోసం డిజిటల్ **Rough Sheet**. ఇందులో పెన్సిల్ మరియు ఎరేజర్ ఉపయోగించి లెక్కలు ప్రాక్టీస్ చేయవచ్చు.
+- **Agriculture Updates:** వ్యవసాయం మరియు రైతులకు సంబంధించిన తాజా సమాచారం మరియు వీడియోలు.
+- **Village Cleaning:** గ్రామంలో జరుగుతున్న క్లీనింగ్ పనుల అప్‌డేట్స్.
+- **Owner Access:** అడ్మిన్ పాస్‌వర్డ్ (**5292**) ద్వారా మాత్రమే డేటాను మార్చడానికి లేదా డిలీట్ చేయడానికి అవకాశం.
+- **Public Uploads:** గ్రామస్తులు ఎవరైనా ఫోటోలు లేదా PDF డాక్యుమెంట్లను అప్‌లోడ్ చేసే సదుపాయం.
 
-## 📄 License
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+## 🛠️ ఎలా ఉపయోగించాలి? (How to Use)
 
-## 👤 Credits
+1. **సందర్శకులు (Visitors):** వెబ్‌సైట్ ఓపెన్ చేసి గ్రామ అప్‌డేట్స్ చూడవచ్చు మరియు ఫైల్స్ అప్‌లోడ్ చేయవచ్చు.
+2. **విద్యార్థులు (Students):** 'Study Hub' లో ఉన్న "Open Drawing Sheet" క్లిక్ చేసి రఫ్ వర్క్ చేసుకోవచ్చు.
+3. **యజమాని (Owner):** 'Admin Login' పై క్లిక్ చేసి **5292** పాస్‌వర్డ్ ఎంటర్ చేస్తే, సమాచారాన్ని రాయడానికి మరియు పాత డేటాను తొలగించడానికి ఆప్షన్లు కనిపిస్తాయి.
+
+## 📄 లైసెన్స్ (License)
+ఈ ప్రాజెక్ట్ **MIT License** కింద రిజిస్టర్ చేయబడింది. వివరాల కోసం [LICENSE](LICENSE) ఫైల్ చూడండి.
+
+## 👤 డెవలపర్ (Developer)
 **Developed by:** [@infobypawarsachin](https://github.com/your-username)  
-*Digital Solutions for Rural Development.*
+*Digital Solutions for Station Thanda Development.*
