@@ -1,269 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="te">
 <head>
-<meta charset="UTF-8">
-<title>Station Thanda</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Thanda | Official Village & Job Portal</title>
+    <style>
+        :root { --saffron: #FF9933; --white: #FFFFFF; --green: #138808; --dark: #2c3e50; --blue: #2980b9; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f4f7f6; color: #333; }
 
+        /* --- TRANSLATE BAR --- */
+        #google_translate_element { background: white; text-align: center; padding: 5px; border-bottom: 1px solid #ddd; }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-}
+        /* --- HEADER SECTION --- */
+        .header-section {
+            background-color: var(--saffron);
+            min-height: 35vh;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            position: relative;
+            text-align: center;
+        }
+        .owner-tag { position: absolute; top: 10px; left: 10px; font-size: 11px; background: rgba(0,0,0,0.3); padding: 3px 10px; border-radius: 20px; text-decoration: none; color: white; }
+        
+        .profile { flex: 1; min-width: 250px; padding: 15px; }
+        .profile img { width: 140px; height: 140px; border-radius: 50%; border: 5px solid white; object-fit: cover; background: #eee; }
+        .profile h3 { margin: 15px 0 5px; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; line-height: 1.3; }
+        .profile p { margin: 0; font-size: 11px; font-weight: bold; opacity: 0.9; }
 
+        .center-title { flex: 2; min-width: 300px; }
+        .center-title h1 { font-size: clamp(28px, 5vw, 45px); margin: 0; letter-spacing: 2px; }
+        .youtube-btn { display: inline-block; margin-top: 10px; background: red; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 14px; }
 
-/* HEADER */
-.header {
-    height: 33vh;
-    background: linear-gradient(to right, #ff9800, #ff6f00);
-    color: white;
-    position: relative;
-    padding: 10px;
-}
+        /* --- MIDDLE DIVIDER --- */
+        .middle-divider { height: 6px; background: var(--dark); width: 100%; position: sticky; top: 0; z-index: 100; }
 
+        /* --- MAIN CONTENT AREA --- */
+        .main-container { display: flex; flex-wrap: wrap; min-height: 60vh; }
+        .left-side { flex: 1; min-width: 350px; background: white; border-right: 3px solid #eee; padding: 20px; }
+        .right-side { flex: 1; min-width: 350px; background: #fff; padding: 20px; border-left: 3px solid #eee; }
 
-.owner-tag {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-weight: bold;
-}
+        /* --- TAB STYLING --- */
+        .tab-btn { 
+            width: 100%; background: #fff; border: 1px solid #ddd; padding: 16px; 
+            margin-bottom: 8px; text-align: left; font-weight: bold; cursor: pointer; 
+            display: flex; justify-content: space-between; align-items: center;
+            border-radius: 8px; transition: all 0.3s;
+        }
+        .tab-btn:hover { background: #fff5eb; border-color: var(--saffron); color: var(--saffron); }
+        .tab-btn.active { background: var(--saffron); color: white; border-color: var(--saffron); }
+        .tab-content { display: none; padding: 20px; border: 1px solid #eee; margin-bottom: 20px; border-radius: 12px; background: #fafafa; animation: fadeIn 0.5s; }
 
+        /* --- FEED CONTAINERS --- */
+        .feed-container { height: 500px; overflow-y: scroll; border: 1px solid #ddd; border-radius: 8px; background: #fff; padding: 5px; }
 
-.profile {
-    position: absolute;
-    text-align: center;
-}
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .main-container { flex-direction: column; }
+            .header-section { flex-direction: column; padding-top: 40px; }
+        }
 
-
-.profile img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: 3px solid white;
-}
-
-
-.left-profile {
-    left: 10px;
-    bottom: 10px;
-}
-
-
-.right-profile {
-    right: 10px;
-    bottom: 10px;
-}
-
-
-/* MAIN SECTION */
-.main {
-    display: flex;
-    height: 60vh;
-}
-
-
-/* LEFT */
-.left {
-    width: 50%;
-    padding: 10px;
-    overflow-y: auto;
-    background: #ffffff;
-}
-
-
-/* RIGHT */
-.right {
-    width: 50%;
-    padding: 10px;
-    overflow-y: auto;
-    background: #fafafa;
-}
-
-
-/* DIVIDER */
-.divider {
-    width: 5px;
-    background: #ff9800;
-    cursor: col-resize;
-}
-
-
-/* TABS */
-.tabs button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    margin-bottom: 5px;
-    background: #ff9800;
-    color: white;
-    cursor: pointer;
-}
-
-
-.tabs button:hover {
-    background: #e65100;
-}
-
-
-.tab-content {
-    display: none;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
-
-
-/* COMMENTS */
-textarea {
-    width: 100%;
-    height: 60px;
-}
-
-
-.comment {
-    background: #eee;
-    padding: 5px;
-    margin-top: 5px;
-}
-
-
-/* FOOTER */
-.footer {
-    background: #ff9800;
-    text-align: center;
-    padding: 8px;
-    color: white;
-    font-weight: bold;
-}
-</style>
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        footer { background: #222; color: #aaa; text-align: center; padding: 25px; font-size: 14px; }
+        footer a { color: var(--saffron); text-decoration: none; }
+    </style>
 </head>
-
-
 <body>
 
+    <div id="google_translate_element"></div>
 
-<!-- HEADER -->
-<div class="header">
-    <div class="owner-tag">@infobypawarsachin</div>
+    <div class="header-section">
+        <a href="https://youtube.com/@infobypawarsachin?si=MCv0Mc6VEYy8WQaj" class="owner-tag" target="_blank">@infobypawarsachin</a>
+        
+        <div class="profile">
+            <img src="sarpanch.jpg" alt="Sarpanch">
+            <h3>VISLAVATH BHARATHI JAGATHSINGH PAWAR</h3>
+            <p>SARPANCH (Station Thanda)</p>
+        </div>
 
+        <div class="center-title">
+            <h1>STATION THANDA</h1>
+            <p>Smart Village Digital Portal 2025</p>
+            <a href="https://youtube.com/@infobypawarsachin?si=MCv0Mc6VEYy8WQaj" target="_blank" class="youtube-btn">Subscribe YouTube</a>
+        </div>
 
-    <div class="profile left-profile">
-        <img src="https://via.placeholder.com/150">
-        <div><b>Sarpanch</b><br>VISLAVATH BHARATHI<br>JAGATHSINGH PAWAR</div>
-    </div>
+        <div class="profile">
+            <img src="father.jpg" alt="Father Memory">
+            <h3>V NOORSINGH NAYAK</h3>
+            <p>IN LOVING MEMORY</p>
+        </div>
+    </div>
 
+    <div class="middle-divider"></div>
 
-    <div class="profile right-profile">
-        <img src="https://via.placeholder.com/150">
-        <div><b>Late</b><br>VISLAVATH NOORSINGH<br>NAYAK PAWAR</div>
-    </div>
-</div>
+    <div class="main-container">
+        
+        <div class="left-side">
+            <button class="tab-btn active" onclick="toggleTab(event, 'jobs')">🔔 Live Job Alerts (TS & Central) <span>+</span></button>
+            <div id="jobs" class="tab-content" style="display: block;">
+                <p style="font-size: 12px; color: var(--blue);">🔄 Auto-Updating Job Feeds</p>
+                <div class="feed-container">
+                    <iframe src="https://rss.app/embed/v1/list/tLM18Zx8ztz9C3Nk" frameborder="0" width="100%" height="450"></iframe>
+                    <iframe src="https://rss.app/embed/v1/list/t0oZM6JheFXpyIpp" frameborder="0" width="100%" height="450"></iframe>
+                    <iframe src="https://rss.app/embed/v1/list/tOeQk7hQdHOvWcYv" frameborder="0" width="100%" height="450"></iframe>
+                    <iframe src="https://rss.app/embed/v1/list/tO37YdMxjPCV4vov" frameborder="0" width="100%" height="450"></iframe>
+                    <iframe src="https://rss.app/embed/v1/list/tFwUd1nW53dARInB" frameborder="0" width="100%" height="450"></iframe>
+                </div>
+            </div>
 
+            <button class="tab-btn" onclick="toggleTab(event, 'village')">📂 Village Information <span>+</span></button>
+            <div id="village" class="tab-content">
+                <table width="100%" border="1" cellpadding="10" style="border-collapse:collapse; background:white;">
+                    <tr style="background:#eee;"><th>Ward</th><th>Member Name</th></tr>
+                    <tr><td>WARD 1</td><td>RATHLA GEETHA BALU</td></tr>
+                    <tr><td>WARD 2</td><td>MALAVATH SRINIVAS (VICE SARPANCH)</td></tr>
+                    <tr><td>WARD 3</td><td>VISLAVATH LALITHA JORSINGH</td></tr>
+                    <tr><td>WARD 4</td><td>BANAVATH SANTOSH</td></tr>
+                    <tr><td>WARD 5</td><td>VISLAVATH JAYA SEVYA</td></tr>
+                    <tr><td>WARD 6</td><td>BADAVATH UPENDRA ( CHENNAI )</td></tr>
+                    <tr><td>WARD 7</td><td>BADAVATH LALITHA RAMULU</td></tr>
+                    <tr><td>WARD 8</td><td>JAWAHAR</td></tr>
+                </table>
+                <br>
+                <a href="https://www.office.com" target="_blank" style="color:var(--green); font-weight:bold;">📄 Open Villager Database</a>
+            </div>
 
-<!-- MAIN -->
-<div class="main">
+            <button class="tab-btn" onclick="toggleTab(event, 'agri')">🚜 Agriculture Updates <span>+</span></button>
+            <div id="agri" class="tab-content">
+                <p><strong>Current Market Price:</strong> Cotton & Paddy updates.</p>
+                <textarea style="width:100%; border-radius:5px; padding:10px;" placeholder="Admin: Note crop status here..."></textarea>
+            </div>
 
+            <button class="tab-btn" onclick="toggleTab(event, 'study')">🎓 Study Hub & General Science <span>+</span></button>
+            <div id="study" class="tab-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                    <div style="background:#f0f7ff; padding:10px; border-radius:8px; border-bottom:3px solid var(--blue);">
+                        <strong style="font-size:13px; color:var(--blue);">🧬 General Science</strong>
+                        <p style="font-size:11px; margin:5px 0;">Physics, Chemistry & Biology materials.</p>
+                    </div>
+                    <div style="background:#fff5eb; padding:10px; border-radius:8px; border-bottom:3px solid var(--saffron);">
+                        <strong style="font-size:13px; color:var(--saffron);">🧮 Arithmetic</strong>
+                        <p style="font-size:11px; margin:5px 0;">Math tricks and daily sums.</p>
+                    </div>
+                </div>
+                <div class="feed-container" style="height: 350px;">
+                    <iframe src="https://rss.app/embed/v1/list/tFwUd1nW53dARInB" frameborder="0" width="100%" height="600"></iframe>
+                </div>
+                <a href="https://www.sakshieducation.com/" target="_blank" class="youtube-btn" style="background:var(--green); width:100%; text-align:center;">Open Education Library</a>
+            </div>
 
-<!-- LEFT PART -->
-<div class="left">
+            <button class="tab-btn" onclick="toggleTab(event, 'videos')">🎥 Watch Videos <span>+</span></button>
+            <div id="videos" class="tab-content">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+            </div>
 
+            <button class="tab-btn" onclick="toggleTab(event, 'comments')">💬 Suggestions <span>+</span></button>
+            <div id="comments" class="tab-content">
+                <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" width="100%" height="400" frameborder="0">Loading…</iframe>
+            </div>
+        </div>
 
-<div class="tabs">
-<button onclick="openTab('village')">Village Info</button>
-<button onclick="openTab('agri')">Agriculture Info</button>
-<button onclick="openTab('study')">Study Hub</button>
-<button onclick="openTab('media')">Watch Videos & Photos</button>
-<button onclick="openTab('comments')">Comments</button>
-</div>
+        <div class="right-side">
+            <h2 style="color:var(--dark); margin-top:0;">Live News (తెలంగాణ)</h2>
+            <div class="feed-container">
+                <iframe src="https://rss.app/embed/v1/list/tbteIAo4gyobJRmZ" frameborder="0" width="100%" height="800"></iframe>
+            </div>
+        </div>
 
+    </div>
 
-<div id="village" class="tab-content">
-<h3>Gram Panchayat Info</h3>
-<p>Ward Members – Manual Table</p>
-<p>Villagers Full Data – MS Office / Excel Link</p>
-</div>
+    <footer>
+        <p>Site Tag: <a href="https://youtube.com/@infobypawarsachin?si=MCv0Mc6VEYy8WQaj" target="_blank">@infobypawarsachin</a> | Station Thanda Village Portal</p>
+    </footer>
 
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'te', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<div id="agri" class="tab-content">
-<h3>Agriculture Info</h3>
-<p>Manual write & save information here.</p>
-<p>Viewer count enabled.</p>
-</div>
-
-
-<div id="study" class="tab-content">
-<h3>Study Hub</h3>
-<ul>
-<li>Arithmetic</li>
-<li>Reasoning</li>
-<li>Current Affairs</li>
-<li>GK</li>
-<li>Telangana History</li>
-</ul>
-<p>Content auto-generated (sample).</p>
-</div>
-
-
-<div id="media" class="tab-content">
-<h3>Videos & Photos</h3>
-<p>Instagram & YouTube Shorts (API Ready)</p>
-</div>
-
-
-<div id="comments" class="tab-content">
-<h3>Comments</h3>
-<textarea id="commentBox" placeholder="Write your comment..."></textarea>
-<button onclick="addComment()">Post</button>
-<div id="commentList"></div>
-</div>
-
-
-</div>
-
-
-<div class="divider"></div>
-
-
-<!-- RIGHT PART -->
-<div class="right">
-<h3>తాజా వార్తలు (Latest News)</h3>
-<ul>
-<li>తెలంగాణ వార్తలు – Auto (API Ready)</li>
-<li>కేంద్ర ప్రభుత్వ వార్తలు – Auto</li>
-</ul>
-</div>
-
-
-</div>
-
-
-<!-- FOOTER -->
-<div class="footer">
-@infobypawarsachin
-</div>
-
-
-<script>
-function openTab(tabId) {
-    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-    document.getElementById(tabId).style.display = 'block';
-}
-
-
-function addComment() {
-    let text = document.getElementById("commentBox").value;
-    if(text.trim() === "") return;
-    let div = document.createElement("div");
-    div.className = "comment";
-    div.innerText = text;
-    document.getElementById("commentList").appendChild(div);
-    document.getElementById("commentBox").value = "";
-}
-</script>
-
-
+    <script>
+        function toggleTab(evt, tabId) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+            document.getElementById(tabId).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 </body>
 </html>
 
