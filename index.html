@@ -1,1384 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Station Thanda — Smart Hub</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Thanda | Smart Village Digital Hub</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- ROOT & THEME VARIABLES --- */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --accent-color: #ffc107;
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --text-main: #212529;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --primary-color: #3d8bff;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        .navbar-brand { font-weight: 700; letter-spacing: 1px; }
+        .nav-link { font-weight: 500; margin: 0 10px; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1509099836639-18ba02a3a1b7?q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h1 { font-size: 4rem; font-weight: 700; margin-bottom: 20px; }
+        .hero-content p { font-size: 1.5rem; opacity: 0.9; }
+
+        /* --- CARD STYLING --- */
+        .custom-card {
+            background-color: var(--bg-card);
+            border: none;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .custom-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: rgba(13, 110, 253, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        /* --- NEWS SECTION --- */
+        .news-container {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: -100px;
+            position: relative;
+            z-index: 10;
+        }
+        .news-ticker-item {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+        .news-date {
+            min-width: 100px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* --- ADMIN PANEL OVERLAY --- */
+        #adminPanel {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 50px 20px;
+        }
+        .admin-box {
+            background: var(--bg-card);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 25px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #111;
+            color: #888;
+            padding: 60px 0 20px;
+            margin-top: 100px;
+        }
+        footer h5 { color: white; font-weight: 700; }
+        .footer-link { color: #888; text-decoration: none; transition: 0.3s; }
+        .footer-link:hover { color: var(--primary-color); padding-left: 5px; }
+
+        /* --- UTILITIES --- */
+        .section-title { font-weight: 700; margin-bottom: 40px; position: relative; }
+        .section-title::after {
+            content: ''; width: 60px; height: 4px; background: var(--accent-color);
+            position: absolute; bottom: -10px; left: 0; border-radius: 2px;
+        }
+    </style>
 </head>
-<body>
-
-<!-- Header & Navigation -->
-<header>
-  <nav class="nav-container">
-    <div class="logo">Station Thanda</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#news">Live News</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button id="theme-toggle">🌙</button>
-  </nav>
-</header>
-
-<main>
-  <!-- Hero Section -->
-  <section id="hero">
-    <h1>Welcome to Station Thanda Digital Hub</h1>
-    <p>Smart Village — Information, Services, Alerts & More</p>
-  </section>
-
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Managed by @infobypawarsachin — Bringing local services and live alerts to your community.</p>
-  </section>
-
-  <!-- Services Cards -->
-  <section id="services">
-    <h2>Citizen Services</h2>
-    <div class="cards">
-      <a class="card" href="https://dharani.telangana.gov.in">DHARANI</a>
-      <a class="card" href="https://epds.telangana.gov.in">Ration Card</a>
-      <a class="card" href="https://www.aasara.telangana.gov.in">Pension</a>
-      <a class="card" href="https://ts.meeseva.telangana.gov.in">MeeSeva</a>
-    </div>
-  </section>
-
-  <!-- Live News Section -->
-  <section id="news">
-    <h2>Live News & Alerts</h2>
-    <p>Latest updates in your area — stay informed.</p>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>You can reach us at: <a href="mailto:contact@example.com">contact@example.com</a></p>
-  </section>
-</main>
-
-<!-- Footer -->
-<footer>
-  <p>&copy; 2025 Station Thanda</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
-const button = document.getElementById("theme-toggle");
-button.addEventListener("click", () => {
-document.body.classList.toggle("dark-theme");
-
-if (document.body.classList.contains("dark-theme")) {
-button.textContent = "☀️";
-} else {
-button.textContent = "🌙";
-}
-});
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Info By Pawar Sachin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">InfoBySachin</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="menu">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="container text-center">
-    <h1 class="display-5 fw-bold">Digital Information Hub</h1>
-    <p class="lead">All Government Services, News & Alerts in One Place</p>
-    <a href="#services" class="btn btn-warning btn-lg mt-3">Explore Services</a>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="container py-5">
-  <h2 class="text-center mb-4">Citizen Services</h2>
-  <div class="row g-4">
-
-    <div class="col-md-3">
-      <div class="service-card">
-        <i class="bi bi-bank"></i>
-        <h5>Dharani</h5>
-        <a href="https://dharani.telangana.gov.in" target="_blank">Open</a>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="service-card">
-        <i class="bi bi-card-checklist"></i>
-        <h5>Ration Card</h5>
-        <a href="https://epds.telangana.gov.in" target="_blank">Open</a>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="service-card">
-        <i class="bi bi-cash-coin"></i>
-        <h5>Pension</h5>
-        <a href="https://www.aasara.telangana.gov.in" target="_blank">Open</a>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="service-card">
-        <i class="bi bi-file-earmark-text"></i>
-        <h5>MeeSeva</h5>
-        <a href="https://ts.meeseva.telangana.gov.in" target="_blank">Open</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="about-section">
-  <div class="container text-center">
-    <h2>About</h2>
-    <p>
-      InfoByPawarSachin is a digital platform created to provide
-      easy access to government services, live updates and village information.
-    </p>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="container py-5 text-center">
-  <h2>Contact</h2>
-  <p>Email: <strong>infobypawarsachin@gmail.com</strong></p>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2025 Info By Pawar Sachin | All Rights Reserved</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
-</body>
-</html>
-body {
-  font-family: 'Segoe UI', sans-serif;
-}
-
-/* Navbar */
-.navbar {
-  background: #0d6efd;
-}
-
-/* Hero */
-.hero {
-  height: 100vh;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-              url("https://images.unsplash.com/photo-1521791136064-7986c2920216") center/cover;
-  color: white;
-  display: flex;
-  align-items: center;
-}
-
-/* Services */
-.service-card {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  transition: 0.3s;
-}
-.service-card i {
-  font-size: 40px;
-  color: #0d6efd;
-}
-.service-card:hover {
-  transform: translateY(-10px);
-}
-.service-card a {
-  display: inline-block;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #0d6efd;
-  font-weight: bold;
-}
-
-/* About */
-.about-section {
-  background: #f8f9fa;
-  padding: 60px 0;
-}
-
-/* Footer */
-footer {
-  background: #0d6efd;
-  color: white;
-  text-align: center;
-  padding: 15px;
-}
-document.querySelectorAll(".service-card").forEach(card => {
-  card.addEventListener("mouseover", () => {
-    card.style.boxShadow = "0 10px 30px rgba(0,0,0,0.2)";
-  });
-  card.addEventListener("mouseout", () => {
-    card.style.boxShadow = "0 5px 20px rgba(0,0,0,0.1)";
-  });
-});
-<button class="btn btn-light btn-sm ms-3" id="darkToggle">
-  🌙
-</button>
-<body data-theme="light">
-/* DARK MODE */
-body[data-theme="dark"] {
-background: #121212;
-color: #f1f1f1;
-}
-
-body[data-theme="dark"] .navbar,
-body[data-theme="dark"] footer {
-background: #1f1f1f;
-}
-
-body[data-theme="dark"] .service-card {
-background: #1e1e1e;
-color: #fff;
-}
-
-body[data-theme="dark"] .about-section {
-background: #181818;
-}
-
-body[data-theme="dark"] a {
-color: #ffc107;
-}
-
-/* Smooth Scroll */
-html {
-scroll-behavior: smooth;
-}
-
-/* Scroll Animation */
-.fade-up {
-opacity: 0;
-transform: translateY(40px);
-transition: 0.8s ease;
-}
-.fade-up.show {
-opacity: 1;
-transform: translateY(0);
-}
-// DARK MODE TOGGLE
-const toggle = document.getElementById("darkToggle");
-const body = document.body;
-
-toggle.addEventListener("click", () => {
-  const theme = body.getAttribute("data-theme");
-  if (theme === "light") {
-    body.setAttribute("data-theme", "dark");
-    toggle.textContent = "☀️";
-  } else {
-    body.setAttribute("data-theme", "light");
-    toggle.textContent = "🌙";
-  }
-});
-
-// SCROLL ANIMATION
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-});
-
-document.querySelectorAll(".service-card, section").forEach(el => {
-  el.classList.add("fade-up");
-  observer.observe(el);
-});
-<!-- LIVE NEWS -->
-<section id="news" class="container py-5">
-<h2 class="text-center mb-4">Live Job & Government News</h2>
-<div class="row" id="newsContainer">
-<p class="text-center">Loading latest updates...</p>
-</div>
-</section>
-.news-card {
-background: white;
-padding: 20px;
-border-radius: 12px;
-box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-margin-bottom: 20px;
-transition: 0.3s;
-}
-
-.news-card:hover {
-transform: translateY(-5px);
-}
-
-.news-card h6 {
-font-weight: 600;
-}
-
-.news-card a {
-text-decoration: none;
-color: #0d6efd;
-font-weight: bold;
-}
-
-/* Dark mode support */
-body[data-theme="dark"] .news-card {
-background: #1e1e1e;
-color: #fff;
-}
-// LIVE NEWS (Google News RSS)
-const newsContainer = document.getElementById("newsContainer");
-
-// Google News RSS (Jobs + Government India)
-const rssUrl =
-"https://news.google.com/rss/search?q=government+jobs+india&hl=en-IN&gl=IN&ceid=IN:en";
-
-// CORS proxy
-const api =
-"https://api.allorigins.win/get?url=" + encodeURIComponent(rssUrl);
-
-fetch(api)
-.then(response => response.json())
-.then(data => {
-const parser = new DOMParser();
-const xml = parser.parseFromString(data.contents, "text/xml");
-const items = xml.querySelectorAll("item");
-
-newsContainer.innerHTML = "";
-
-items.forEach((item, index) => {
-if (index < 6) {
-const title = item.querySelector("title").textContent;
-const link = item.querySelector("link").textContent;
-
-newsContainer.innerHTML += `
-<div class="col-md-4">
-<div class="news-card fade-up">
-<h6>${title}</h6>
-<a href="${link}" target="_blank">Read More →</a>
-</div>
-</div>
-`;
-}
-});
-})
-.catch(() => {
-newsContainer.innerHTML =
-"<p class='text-center'>Unable to load news right now.</p>";
-});
-<section id="services" class="container py-5">
-<h2 class="text-center mb-4">Citizen Services</h2>
-<div class="row g-4" id="servicesContainer"></div>
-</section>
-<section id="news" class="container py-5">
-<h2 class="text-center mb-4">Job Alerts</h2>
-<div class="row" id="jobsContainer"></div>
-</section>
-// LOAD SERVICES
-const servicesContainer = document.getElementById("servicesContainer");
-const jobsContainer = document.getElementById("jobsContainer");
-
-const services = JSON.parse(localStorage.getItem("services")) || [];
-const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-
-// Render Services
-servicesContainer.innerHTML = services.length
-? services.map(s => `
-<div class="col-md-3">
-<div class="service-card">
-<i class="${s.icon}"></i>
-<h5>${s.name}</h5>
-<a href="${s.link}" target="_blank">Open</a>
-</div>
-</div>
-`).join("")
-: "<p class='text-center'>No services added yet.</p>";
-
-// Render Jobs
-jobsContainer.innerHTML = jobs.length
-? jobs.map(j => `
-<div class="col-md-4">
-<div class="news-card">
-<h6>${j.title}</h6>
-<a href="${j.link}" target="_blank">Apply →</a>
-</div>
-</div>
-`).join("")
-: "<p class='text-center'>No job alerts added yet.</p>";
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Admin Panel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="container py-4">
-
-<h2 class="mb-3">🔐 Admin Panel</h2>
-
-<!-- LOGIN -->
-<div id="loginBox">
-  <input type="password" id="password" class="form-control mb-2" placeholder="Enter Admin Password">
-  <button class="btn btn-primary" onclick="login()">Login</button>
-</div>
-
-<!-- ADMIN CONTENT -->
-<div id="adminContent" style="display:none">
-
-  <hr>
-  <h4>Add Service</h4>
-  <input id="sName" class="form-control mb-2" placeholder="Service Name">
-  <input id="sIcon" class="form-control mb-2" placeholder="Bootstrap Icon class (bi bi-bank)">
-  <input id="sLink" class="form-control mb-2" placeholder="Service Link">
-  <button class="btn btn-success" onclick="addService()">Add Service</button>
-
-  <hr>
-  <h4>Add Job Alert</h4>
-  <input id="jTitle" class="form-control mb-2" placeholder="Job Title">
-  <input id="jLink" class="form-control mb-2" placeholder="Apply Link">
-  <button class="btn btn-warning" onclick="addJob()">Add Job</button>
-
-</div>
-
-<script src="admin.js"></script>
-</body>
-</html>
-const ADMIN_PASSWORD = "1234"; // CHANGE THIS
-
-function login() {
-const pass = document.getElementById("password").value;
-if (pass === ADMIN_PASSWORD) {
-document.getElementById("loginBox").style.display = "none";
-document.getElementById("adminContent").style.display = "block";
-} else {
-alert("Wrong Password");
-}
-}
-
-// ADD SERVICE
-function addService() {
-const services = JSON.parse(localStorage.getItem("services")) || [];
-
-services.push({
-name: sName.value,
-icon: sIcon.value,
-link: sLink.value
-});
-
-localStorage.setItem("services", JSON.stringify(services));
-alert("Service Added!");
-}
-
-// ADD JOB
-function addJob() {
-const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-
-jobs.push({
-title: jTitle.value,
-link: jLink.value
-});
-
-localStorage.setItem("jobs", JSON.stringify(jobs));
-alert("Job Alert Added!");
-}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Station Thanda | Digital Village Portal</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-
 <body data-theme="light">
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">Station Thanda</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="menu">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="#notices">Notices</a></li>
-        <li class="nav-item"><a class="nav-link" href="#jobs">Jobs</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contacts</a></li>
-      </ul>
-      <button id="darkToggle" class="btn btn-light btn-sm ms-2">🌙</button>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero-village" id="dashboard">
-  <div class="container text-center">
-    <h1>Station Thanda</h1>
-    <p>Mandal: ______ | District: ______ | State: Telangana</p>
-  </div>
-</section>
-
-<!-- QUICK INFO -->
-<section class="container py-4">
-  <div class="row text-center g-3">
-    <div class="col-md-3 info-box">👨‍👩‍👧‍👦 Population<br><b>3,200</b></div>
-    <div class="col-md-3 info-box">🏫 Schools<br><b>2</b></div>
-    <div class="col-md-3 info-box">🏥 Health Centers<br><b>1</b></div>
-    <div class="col-md-3 info-box">🚜 Main Occupation<br><b>Agriculture</b></div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="container py-5">
-  <h2 class="text-center mb-4">Village Services</h2>
-  <div class="row g-4" id="servicesContainer"></div>
-</section>
-
-<!-- NOTICES -->
-<section id="notices" class="notice-section">
-  <div class="container">
-    <h2 class="text-center mb-4">Important Notices</h2>
-    <ul class="list-group">
-      <li class="list-group-item">📢 Gram Sabha on Sunday at 10 AM</li>
-      <li class="list-group-item">💧 Water supply maintenance tomorrow</li>
-      <li class="list-group-item">🧹 Village cleanliness drive this week</li>
-    </ul>
-  </div>
-</section>
-
-<!-- JOBS -->
-<section id="jobs" class="container py-5">
-  <h2 class="text-center mb-4">Job Alerts</h2>
-  <div class="row" id="jobsContainer"></div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="container py-5 text-center">
-  <h2>Emergency Contacts</h2>
-  <p>📞 Sarpanch: 9XXXXXXXXX</p>
-  <p>🚑 Ambulance: 108</p>
-  <p>👮 Police: 100</p>
-</section>
-
-<footer>
-  <p>© 2025 Station Thanda Digital Village | Powered by InfoByPawarSachin</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
-</body>
-</html>
-body {
-font-family: "Segoe UI", sans-serif;
-}
-
-.navbar {
-background: #0d6efd;
-}
-
-.hero-village {
-height: 70vh;
-background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-url("https://images.unsplash.com/photo-1509099836639-18ba02a3a1b7");
-background-size: cover;
-background-position: center;
-color: white;
-display: flex;
-align-items: center;
-}
-
-.info-box {
-background: #f8f9fa;
-padding: 20px;
-border-radius: 10px;
-font-weight: 500;
-}
-
-.service-card {
-background: white;
-padding: 25px;
-border-radius: 12px;
-text-align: center;
-box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-transition: 0.3s;
-}
-
-.service-card:hover {
-transform: translateY(-6px);
-}
-
-.notice-section {
-background: #f1f3f5;
-padding: 60px 0;
-}
-
-footer {
-background: #0d6efd;
-color: white;
-text-align: center;
-padding: 15px;
-}
-
-/* DARK MODE */
-body[data-theme="dark"] {
-background: #121212;
-color: white;
-}
-
-body[data-theme="dark"] .service-card,
-body[data-theme="dark"] .info-box,
-body[data-theme="dark"] .list-group-item {
-background: #1e1e1e;
-color: white;
-}
-// DARK MODE
-const toggle = document.getElementById("darkToggle");
-const body = document.body;
-
-toggle.onclick = () => {
-  body.setAttribute(
-    "data-theme",
-    body.getAttribute("data-theme") === "light" ? "dark" : "light"
-  );
-};
-
-// LOAD ADMIN DATA
-const services = JSON.parse(localStorage.getItem("services")) || [];
-const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-
-const servicesContainer = document.getElementById("servicesContainer");
-const jobsContainer = document.getElementById("jobsContainer");
-
-servicesContainer.innerHTML = services.length
-  ? services.map(s => `
-    <div class="col-md-3">
-      <div class="service-card">
-        <i class="${s.icon} fs-1 text-primary"></i>
-        <h5>${s.name}</h5>
-        <a href="${s.link}" target="_blank">Open</a>
-      </div>
-    </div>
-  `).join("")
-  : "<p class='text-center'>No services available.</p>";
-
-jobsContainer.innerHTML = jobs.length
-  ? jobs.map(j => `
-    <div class="col-md-4">
-      <div class="service-card">
-        <h6>${j.title}</h6>
-        <a href="${j.link}" target="_blank">Apply →</a>
-      </div>
-    </div>
-  `).join("")
-  : "<p class='text-center'>No job alerts.</p>";
-npx create-react-app village-portal
-cd village-portal
-npm start
-http://localhost:3000
-src/
-│
-├── components/
-│ ├── Navbar.js
-│ ├── Hero.js
-│ ├── Services.js
-│ ├── Jobs.js
-│ ├── Footer.js
-│
-├── App.js
-├── index.js
-└── App.css
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Services from "./components/Services";
-import Jobs from "./components/Jobs";
-import Footer from "./components/Footer";
-import "./App.css";
-
-function App() {
-  return (
-    <>
-      <Navbar />
-      <Hero />
-      <Services />
-      <Jobs />
-      <Footer />
-    </>
-  );
-}
-
-export default App;
-function Navbar() {
-  return (
-    <nav className="navbar">
-      <h2>Station Thanda</h2>
-      <ul>
-        <li>Services</li>
-        <li>Jobs</li>
-        <li>Contact</li>
-      </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-geo-alt-fill"></i> STATION THANDA</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#village-info">Village Info</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">Live Alerts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-warning btn-sm fw-bold" onclick="toggleTheme()" id="tBtn">🌙 Dark Mode</button>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn btn-outline-light btn-sm" onclick="showAdmin()">🔐 Admin</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
-  );
-}
 
-export default Navbar;
-function Hero() {
-return (
-<section className="hero">
-<h1>Station Thanda Digital Village</h1>
-<p>Mandal | District | Telangana</p>
-</section>
-);
-}
-
-export default Hero;
-const services = [
-  { name: "Dharani", link: "https://dharani.telangana.gov.in" },
-  { name: "MeeSeva", link: "https://ts.meeseva.telangana.gov.in" },
-  { name: "Ration Card", link: "https://epds.telangana.gov.in" }
-];
-
-function Services() {
-  return (
-    <section className="section">
-      <h2>Village Services</h2>
-      <div className="grid">
-        {services.map((s, i) => (
-          <a key={i} href={s.link} target="_blank" rel="noreferrer" className="card">
-            {s.name}
-          </a>
-        ))}
-      </div>
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="display-1">Station Thanda</h1>
+            <p>Empowering our community through digital transparency and easy access to services.</p>
+            <div class="mt-4">
+                <a href="#services" class="btn btn-primary btn-lg px-5 py-3 rounded-pill me-3">Our Services</a>
+                <a href="#contact" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">Get Help</a>
+            </div>
+        </div>
     </section>
-  );
-}
 
-export default Services;
-const jobs = [
-{ title: "Police Recruitment", link: "#" },
-{ title: "Staff Nurse Jobs", link: "#" },
-{ title: "Village Assistant", link: "#" }
-];
+    <div class="container" id="news">
+        <div class="news-container shadow">
+            <h3 class="section-title"><i class="bi bi-megaphone-fill"></i> Live Job & News Alerts</h3>
+            <div id="news-list">
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary"></div>
+                    <p class="mt-2">Loading Live Updates...</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-function Jobs() {
-return (
-<section className="section">
-<h2>Job Alerts</h2>
-<div className="grid">
-{jobs.map((j, i) => (
-<a key={i} href={j.link} className="card">
-{j.title}
-</a>
-))}
-</div>
-</section>
-);
-}
+    <section class="container py-5 mt-5">
+        <div class="row g-4 text-center">
+            <div class="col-md-3">
+                <div class="custom-card">
+                    <h2 class="fw-bold text-primary">3,200</h2>
+                    <p class="text-muted mb-0">Total Population</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="custom-card">
+                    <h2 class="fw-bold text-success">85%</h2>
+                    <p class="text-muted mb-0">Literacy Rate</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="custom-card">
+                    <h2 class="fw-bold text-info">1,100</h2>
+                    <p class="text-muted mb-0">Farmer Families</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="custom-card">
+                    <h2 class="fw-bold text-warning">24/7</h2>
+                    <p class="text-muted mb-0">Digital Help</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-export default Jobs;
-function Footer() {
-  return (
+    <section id="services" class="container py-5">
+        <h2 class="section-title">Citizen Portals</h2>
+        <div class="row g-4" id="services-grid">
+            </div>
+    </section>
+
+    <section id="village-info" class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="section-title">About Our Village</h2>
+                <p>Station Thanda is a progressive village committed to digital transformation. Under the initiative of **@infobypawarsachin**, we aim to bring every government service directly to the fingertips of our residents.</p>
+                <ul class="list-unstyled mt-4">
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Free Wi-Fi at Gram Panchayat</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Digital Land Record Assistance</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Immediate Job Notifications</li>
+                </ul>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb75ec4e?q=80&w=800" class="img-fluid rounded-5 shadow-lg" alt="Village Development">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container py-5">
+        <h2 class="section-title text-center">Emergency & Support</h2>
+        <div class="row g-4 justify-content-center mt-3">
+            <div class="col-md-4">
+                <div class="custom-card text-center">
+                    <i class="bi bi-telephone-fill fs-1 text-danger"></i>
+                    <h4 class="mt-3">Police Control</h4>
+                    <p class="display-6 fw-bold">100</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="custom-card text-center">
+                    <i class="bi bi-hospital-fill fs-1 text-primary"></i>
+                    <h4 class="mt-3">Ambulance</h4>
+                    <p class="display-6 fw-bold">108</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="custom-card text-center">
+                    <i class="bi bi-envelope-fill fs-1 text-warning"></i>
+                    <h4 class="mt-3">Email Support</h4>
+                    <p class="fw-bold">infobypawarsachin@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
-      <p>© 2025 Station Thanda | InfoByPawarSachin</p>
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Station Thanda Hub</h5>
+                    <p>Building a digital bridge between government and citizens. Access all Telangana state services and local news in one portal.</p>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="footer-link">Home</a></li>
+                        <li><a href="#services" class="footer-link">Services</a></li>
+                        <li><a href="#news" class="footer-link">News</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Govt Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.telangana.gov.in" class="footer-link">TS Government</a></li>
+                        <li><a href="https://dharani.telangana.gov.in" class="footer-link">Dharani Portal</a></li>
+                        <li><a href="https://ts.meeseva.telangana.gov.in" class="footer-link">MeeSeva</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Connect</h5>
+                    <div class="d-flex gap-3 fs-4 mt-3">
+                        <i class="bi bi-facebook cursor-pointer"></i>
+                        <i class="bi bi-twitter"></i>
+                        <i class="bi bi-whatsapp"></i>
+                        <i class="bi bi-youtube"></i>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-5 mb-4 border-secondary">
+            <div class="text-center small">
+                © 2025 Station Thanda Digital Hub | Created by InfoByPawarSachin
+            </div>
+        </div>
     </footer>
-  );
-}
 
-export default Footer;
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
+    <div id="adminPanel">
+        <div class="admin-box">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3>🛠 Village Control Panel</h3>
+                <button class="btn-close" onclick="closeAdmin()"></button>
+            </div>
+            
+            <div id="adminAuth">
+                <div class="mb-3">
+                    <label>Admin Password</label>
+                    <input type="password" id="adminPass" class="form-control" placeholder="Default is 1234">
+                </div>
+                <button class="btn btn-primary w-100" onclick="loginAdmin()">Access Dashboard</button>
+            </div>
 
-.navbar {
-  background: #0d6efd;
-  color: white;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-}
+            <div id="adminControls" style="display: none;">
+                <ul class="nav nav-tabs mb-3" id="adminTabs">
+                    <li class="nav-item"><a class="nav-link active" href="#" onclick="switchTab('serv')">Manage Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="switchTab('news')">Local Announcements</a></li>
+                </ul>
+                
+                <div id="tab-serv">
+                    <h5>Add New Service</h5>
+                    <input type="text" id="sName" class="form-control mb-2" placeholder="Service Name (e.g. Voter ID)">
+                    <input type="text" id="sIcon" class="form-control mb-2" placeholder="Icon Class (e.g. bi-person)">
+                    <input type="text" id="sUrl" class="form-control mb-2" placeholder="Website Link">
+                    <button class="btn btn-success" onclick="saveService()">Add to Portal</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 15px;
-}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // --- THEME MANAGEMENT ---
+        function toggleTheme() {
+            const b = document.body;
+            const current = b.getAttribute('data-theme');
+            const target = current === 'light' ? 'dark' : 'light';
+            b.setAttribute('data-theme', target);
+            document.getElementById('tBtn').innerHTML = target === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+            localStorage.setItem('siteTheme', target);
+        }
+        // Load preference
+        if(localStorage.getItem('siteTheme') === 'dark') toggleTheme();
 
-.hero {
-  height: 60vh;
-  background: #1e88e5;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+        // --- ADMIN LOGIC ---
+        function showAdmin() { document.getElementById('adminPanel').style.display = 'block'; }
+        function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
+        
+        function loginAdmin() {
+            const pass = document.getElementById('adminPass').value;
+            if(pass === "1234") {
+                document.getElementById('adminAuth').style.display = 'none';
+                document.getElementById('adminControls').style.display = 'block';
+            } else { alert("Access Denied!"); }
+        }
 
-.section {
-  padding: 40px;
-  text-align: center;
-}
+        // --- DATA MANAGEMENT ---
+        const defaultServices = [
+            { name: "Dharani", icon: "bi-map", url: "https://dharani.telangana.gov.in" },
+            { name: "MeeSeva", icon: "bi-pc-display", url: "https://ts.meeseva.telangana.gov.in" },
+            { name: "Ration Card", icon: "bi-card-list", url: "https://epds.telangana.gov.in" },
+            { name: "Pension", icon: "bi-person-heart", url: "https://www.aasara.telangana.gov.in" }
+        ];
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
+        function renderServices() {
+            let data = JSON.parse(localStorage.getItem('vServices')) || defaultServices;
+            const grid = document.getElementById('services-grid');
+            grid.innerHTML = data.map(s => `
+                <div class="col-md-3">
+                    <a href="${s.url}" target="_blank" class="custom-card">
+                        <div class="icon-box"><i class="bi ${s.icon}"></i></div>
+                        <h4>${s.name}</h4>
+                        <p class="text-muted small">Official Government Access</p>
+                        <span class="btn btn-link p-0 fw-bold">Open Portal →</span>
+                    </a>
+                </div>
+            `).join('');
+        }
 
-.card {
-  padding: 20px;
-  background: #f4f4f4;
-  border-radius: 10px;
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-}
+        function saveService() {
+            let data = JSON.parse(localStorage.getItem('vServices')) || defaultServices;
+            data.push({
+                name: document.getElementById('sName').value,
+                icon: document.getElementById('sIcon').value,
+                url: document.getElementById('sUrl').value
+            });
+            localStorage.setItem('vServices', JSON.stringify(data));
+            renderServices();
+            alert("Service Added Successfully!");
+        }
 
-footer {
-  background: #0d6efd;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}
-npm install gh-pages --save-dev
-"predeploy": "npm run build",
-"deploy": "gh-pages -d build"
-npm run deploy
-const firebaseConfig = {
-apiKey: "your-api-key",
-authDomain: "your-app-id.firebaseapp.com",
-projectId: "your-project-id",
-storageBucket: "your-app-id.appspot.com",
-messagingSenderId: "sender-id",
-appId: "your-app-id",
-measurementId: "G-XXXXXX"
-};
-npm install firebase
-import firebase from "firebase/app";
-import "firebase/firestore";
+        // --- LIVE NEWS FETCH (Google News RSS via Proxy) ---
+        async function fetchLiveNews() {
+            const newsList = document.getElementById('news-list');
+            const rssUrl = "https://news.google.com/rss/search?q=telangana+government+jobs+alerts&hl=en-IN&gl=IN&ceid=IN:en";
+            
+            try {
+                const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`);
+                const data = await res.json();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(data.contents, "text/xml");
+                const items = xml.querySelectorAll("item");
+                
+                let html = '';
+                items.forEach((item, i) => {
+                    if(i < 6) {
+                        const title = item.querySelector("title").textContent;
+                        const link = item.querySelector("link").textContent;
+                        const date = new Date(item.querySelector("pubDate").textContent).toLocaleDateString();
+                        html += `
+                            <div class="news-ticker-item">
+                                <div class="news-date">${date}</div>
+                                <div class="flex-grow-1 mx-3 fw-semibold">${title}</div>
+                                <a href="${link}" target="_blank" class="btn btn-outline-primary btn-sm rounded-pill">View</a>
+                            </div>
+                        `;
+                    }
+                });
+                newsList.innerHTML = html;
+            } catch (e) {
+                newsList.innerHTML = '<p class="text-center text-danger">Temporary News Sync Issue. Please check back later.</p>';
+            }
+        }
 
-// Your Firebase config here
-const firebaseConfig = {
-  apiKey: "your-api-key",
-  authDomain: "your-app-id.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-app-id.appspot.com",
-  messagingSenderId: "sender-id",
-  appId: "your-app-id",
-  measurementId: "G-XXXXXX"
-};
-
-// Initialize Firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-
-export { db };
-
-import { useEffect, useState } from "react";
-import { db } from "../firebase"; // Import Firebase DB
-
-function Services() {
-  const [services, setServices] = useState([]);
-
-  useEffect(() => {
-    // Fetch services data from Firestore
-    db.collection("services").onSnapshot((snapshot) => {
-      setServices(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          link: doc.data().link,
-          icon: doc.data().icon,
-        }))
-      );
-    });
-  }, []);
-
-  return (
-    <section className="section">
-      <h2>Village Services</h2>
-      <div className="grid">
-        {services.map((s) => (
-          <a key={s.id} href={s.link} target="_blank" rel="noreferrer" className="card">
-            <i className={`${s.icon} fs-1 text-primary`}></i>
-            <h5>{s.name}</h5>
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export default Services;
-import { db } from './firebase';
-
-// Add new service to Firestore
-function addService() {
-  db.collection("services").add({
-    name: sName.value,
-    icon: sIcon.value,
-    link: sLink.value,
-  })
-  .then(() => {
-    alert("Service added!");
-  })
-  .catch((error) => {
-    alert("Error adding service: ", error);
-  });
-}
-
-// Add new job to Firestore
-function addJob() {
-  db.collection("jobs").add({
-    title: jTitle.value,
-    link: jLink.value,
-  })
-  .then(() => {
-    alert("Job alert added!");
-  })
-  .catch((error) => {
-    alert("Error adding job alert: ", error);
-  });
-}
-service cloud.firestore {
-match /databases/{database}/documents {
-match /{document=**} {
-allow read, write: if request.auth != null;
-}
-}
-}
-npm install firebase
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-
-// Your Firebase config here
-const firebaseConfig = {
-apiKey: "your-api-key",
-authDomain: "your-app-id.firebaseapp.com",
-projectId: "your-project-id",
-storageBucket: "your-app-id.appspot.com",
-messagingSenderId: "sender-id",
-appId: "your-app-id",
-measurementId: "G-XXXXXX"
-};
-
-// Initialize Firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-const auth = firebaseApp.auth();
-
-export { db, auth };
-import { useState } from "react";
-import { auth } from "../firebase";
-import firebase from "firebase/app";
-
-function Auth({ setUser }) {
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [isSignUp, setIsSignUp] = useState(false);
-const [error, setError] = useState("");
-
-const handleAuth = async (e) => {
-e.preventDefault();
-setError("");
-
-try {
-if (isSignUp) {
-await auth.createUserWithEmailAndPassword(email, password);
-} else {
-await auth.signInWithEmailAndPassword(email, password);
-}
-setUser(auth.currentUser);
-} catch (error) {
-setError(error.message);
-}
-};
-
-const handleGoogleSignIn = async () => {
-const provider = new firebase.auth.GoogleAuthProvider();
-try {
-await auth.signInWithPopup(provider);
-setUser(auth.currentUser);
-} catch (error) {
-setError(error.message);
-}
-};
-
-return (
-<div className="auth-container">
-<h2>{isSignUp ? "Sign Up" : "Sign In"}</h2>
-<form onSubmit={handleAuth}>
-<input
-type="email"
-placeholder="Email"
-value={email}
-onChange={(e) => setEmail(e.target.value)}
-/>
-<input
-type="password"
-placeholder="Password"
-value={password}
-onChange={(e) => setPassword(e.target.value)}
-/>
-<button type="submit">{isSignUp ? "Sign Up" : "Sign In"}</button>
-</form>
-<p>{error}</p>
-<button onClick={handleGoogleSignIn}>Sign In with Google</button>
-<p>
-{isSignUp ? "Already have an account?" : "Don't have an account?"}
-<button onClick={() => setIsSignUp(!isSignUp)}>
-{isSignUp ? "Sign In" : "Sign Up"}
-</button>
-</p>
-</div>
-);
-}
-
-export default Auth;
-import { useState, useEffect } from "react";
-import { auth } from "./firebase";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Services from "./components/Services";
-import Jobs from "./components/Jobs";
-import Footer from "./components/Footer";
-import Auth from "./components/Auth";
-import "./App.css";
-
-function App() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Listen to user authentication status
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-
-    return unsubscribe;
-  }, []);
-
-  const handleSignOut = () => {
-    auth.signOut();
-    setUser(null);
-  };
-
-  return (
-    <>
-      <Navbar handleSignOut={handleSignOut} user={user} />
-      {user ? (
-        <>
-          <Hero />
-          <Services />
-          <Jobs />
-          <Footer />
-        </>
-      ) : (
-        <Auth setUser={setUser} />
-      )}
-    </>
-  );
-}
-
-export default App;
-import React from "react";
-
-function Navbar({ handleSignOut, user }) {
-  return (
-    <nav className="navbar">
-      <h2>Station Thanda</h2>
-      <ul>
-        <li>Services</li>
-        <li>Jobs</li>
-        <li>Contact</li>
-      </ul>
-      {user ? (
-        <button onClick={handleSignOut} className="sign-out-btn">
-          Sign Out
-        </button>
-      ) : (
-        <button onClick={() => alert("Please log in.")} className="sign-in-btn">
-          Sign In
-        </button>
-      )}
-    </nav>
-  );
-}
-
-export default Navbar;
-.auth-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-}
-
-.auth-container input {
-  margin: 10px;
-  padding: 10px;
-  width: 300px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.auth-container button {
-  padding: 10px;
-  width: 300px;
-  border: none;
-  border-radius: 5px;
-  background-color: #0d6efd;
-  color: white;
-  font-weight: bold;
-}
-
-.auth-container p {
-  color: red;
-}
-
-{
-  "email": "vn.sachinpawar5292@gmail.com",
-  "role": "admin"
-}{
-  "email": "user@gmail.com",
-  "role": "viewer"
-}
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    match /users/{userId} {
-      allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.uid == userId;
-    }
-
-    match /services/{doc} {
-      allow read: if true;
-      allow write: if request.auth != null &&
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
-    }
-
-    match /jobs/{doc} {
-      allow read: if true;
-      allow write: if request.auth != null &&
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
-    }
-  }
-}
-import { auth, db } from "../firebase";
-import firebase from "firebase/app";
-await auth.createUserWithEmailAndPassword(email, password);
-
-// SAVE USER ROLE
-await db.collection("users").doc(auth.currentUser.uid).set({
-  email: email,
-  role: "viewer" // default role
-});
-
-"role": "admin"
-import { auth, db } from "./firebase";
-const [user, setUser] = useState(null);
-const [role, setRole] = useState(null);
-
-useEffect(() => {
-const unsubscribe = auth.onAuthStateChanged(async (u) => {
-if (u) {
-setUser(u);
-const doc = await db.collection("users").doc(u.uid).get();
-setRole(doc.data().role);
-} else {
-setUser(null);
-setRole(null);
-}
-});
-
-return unsubscribe;
-}, []);
-<Services role={role} />
-<Jobs role={role} />
-function Services({ role }) {
-  return (
-    <section className="section">
-      <h2>Village Services</h2>
-
-      {role === "admin" && (
-        <button className="admin-btn">
-          ➕ Add Service
-        </button>
-      )}
-
-      {/* services list here */}
-    </section>
-  );
-}
-{role === "admin" && (
-  <button className="admin-btn">
-    ➕ Add Job
-  </button>
-)}
-.admin-btn {
-  background: #dc3545;
-  color: white;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 6px;
-  margin-bottom: 15px;
-  cursor: pointer;
-}
-/villages
-  /{villageId}
-    - name: "Station Thanda"
-    - population: 3200
-    - services: [service1, service2, ...]
-    - jobs: [job1, job2, ...]
-    - notices: [notice1, notice2, ...]
-    - profile: { schools: 2, healthCenters: 1, mainOccupation: "Agriculture" }
-import { useState, useEffect } from "react";
-import { db, auth } from "./firebase";
-import Navbar from "./components/Navbar";
-import VillageDashboard from "./components/VillageDashboard";
-import Auth from "./components/Auth";
-
-function App() {
-const [user, setUser] = useState(null);
-const [role, setRole] = useState(null);
-const [villages, setVillages] = useState([]);
-const [selectedVillage, setSelectedVillage] = useState(null);
-
-useEffect(() => {
-const unsubscribe = auth.onAuthStateChanged(async (u) => {
-if (u) {
-setUser(u);
-const doc = await db.collection("users").doc(u.uid).get();
-setRole(doc.data().role);
-} else {
-setUser(null);
-setRole(null);
-}
-});
-
-return unsubscribe;
-}, []);
-
-// Fetch all villages for admins
-useEffect(() => {
-if (role === "admin") {
-db.collection("villages").onSnapshot((snapshot) => {
-setVillages(snapshot.docs.map((doc) => doc.id)); // Store village ids
-});
-}
-}, [role]);
-
-const handleVillageSelect = (villageId) => {
-setSelectedVillage(villageId);
-};
-
-return (
-<>
-<Navbar handleSignOut={() => auth.signOut()} user={user} />
-{user ? (
-role === "admin" ? (
-<div>
-<h3>Choose a Village</h3>
-<select onChange={(e) => handleVillageSelect(e.target.value)}>
-{villages.map((villageId) => (
-<option key={villageId} value={villageId}>
-{villageId} {/* Display the village name or ID */}
-</option>
-))}
-</select>
-{selectedVillage && (
-<VillageDashboard
-villageId={selectedVillage}
-role={role}
-/>
-)}
-</div>
-) : (
-<VillageDashboard villageId="station-thanda" role={role} />
-)
-) : (
-<Auth setUser={setUser} />
-)}
-</>
-);
-}
-
-export default App;
-import { useEffect, useState } from "react";
-import { db } from "../firebase";
-
-function Services({ villageId, role }) {
-  const [services, setServices] = useState([]);
-
-  useEffect(() => {
-    db.collection("villages")
-      .doc(villageId)
-      .collection("services")
-      .onSnapshot((snapshot) => {
-        setServices(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            name: doc.data().name,
-            link: doc.data().link,
-          }))
-        );
-      });
-  }, [villageId]);
-
-  return (
-    <section className="section">
-      <h2>Village Services</h2>
-      {role === "admin" && (
-        <button className="admin-btn">➕ Add Service</button>
-      )}
-      <div className="grid">
-        {services.map((service) => (
-          <a key={service.id} href={service.link} className="card">
-            {service.name}
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export default Services;
+        // Init
+        renderServices();
+        fetchLiveNews();
+    </script>
+</body>
+          </html>
 
