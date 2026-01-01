@@ -3,453 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Station Thanda | Smart Village Digital Hub</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+    <title>Station Thanda | Premier Study Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- ROOT & THEME VARIABLES --- */
-        :root {
-            --primary-color: #0d6efd;
-            --secondary-color: #6c757d;
-            --accent-color: #ffc107;
-            --bg-body: #f4f7f6;
-            --bg-card: #ffffff;
-            --text-main: #212529;
-            --transition: all 0.3s ease;
-        }
-
-        [data-theme="dark"] {
-            --bg-body: #121212;
-            --bg-card: #1e1e1e;
-            --text-main: #e0e0e0;
-            --primary-color: #3d8bff;
-        }
-
-        /* --- GLOBAL STYLES --- */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            transition: var(--transition);
-            overflow-x: hidden;
-        }
-
-        /* --- NAVIGATION --- */
-        .navbar {
-            background-color: var(--primary-color) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 15px 0;
-        }
-        .navbar-brand { font-weight: 700; letter-spacing: 1px; }
-        .nav-link { font-weight: 500; margin: 0 10px; }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            position: relative;
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1509099836639-18ba02a3a1b7?q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-
-        .hero-content h1 { font-size: 4rem; font-weight: 700; margin-bottom: 20px; }
-        .hero-content p { font-size: 1.5rem; opacity: 0.9; }
-
-        /* --- CARD STYLING --- */
-        .custom-card {
-            background-color: var(--bg-card);
-            border: none;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            height: 100%;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        .custom-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-        .icon-box {
-            width: 70px;
-            height: 70px;
-            background: rgba(13, 110, 253, 0.1);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 2rem;
-            color: var(--primary-color);
-        }
-
-        /* --- NEWS SECTION --- */
-        .news-container {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: -100px;
-            position: relative;
-            z-index: 10;
-        }
-        .news-ticker-item {
-            padding: 15px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-        }
-        .news-date {
-            min-width: 100px;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        /* --- ADMIN PANEL OVERLAY --- */
-        #adminPanel {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 9999;
-            overflow-y: auto;
-            padding: 50px 20px;
-        }
-        .admin-box {
-            background: var(--bg-card);
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            border-radius: 25px;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: #111;
-            color: #888;
-            padding: 60px 0 20px;
-            margin-top: 100px;
-        }
-        footer h5 { color: white; font-weight: 700; }
-        .footer-link { color: #888; text-decoration: none; transition: 0.3s; }
-        .footer-link:hover { color: var(--primary-color); padding-left: 5px; }
-
-        /* --- UTILITIES --- */
-        .section-title { font-weight: 700; margin-bottom: 40px; position: relative; }
-        .section-title::after {
-            content: ''; width: 60px; height: 4px; background: var(--accent-color);
-            position: absolute; bottom: -10px; left: 0; border-radius: 2px;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .sidebar-link:hover { background-color: #1e40af; color: white; transition: 0.3s; }
+        .mcq-card { background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 20px; border-left: 4px solid #3b82f6; }
+        .option-btn { width: 100%; text-align: left; padding: 10px; border: 1px solid #e5e7eb; border-radius: 6px; margin-top: 8px; transition: 0.2s; }
+        .option-btn:hover { border-color: #3b82f6; background-color: #eff6ff; }
+        .ans-box { display: none; margin-top: 15px; padding: 10px; border-radius: 6px; font-weight: 600; }
+        .chat-window { height: 300px; overflow-y: auto; }
     </style>
 </head>
-<body data-theme="light">
+<body class="flex flex-col h-screen">
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="bi bi-geo-alt-fill"></i> STATION THANDA</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#village-info">Village Info</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#news">Live Alerts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    <li class="nav-item ms-lg-3">
-                        <button class="btn btn-warning btn-sm fw-bold" onclick="toggleTheme()" id="tBtn">🌙 Dark Mode</button>
-                    </li>
-                    <li class="nav-item ms-lg-2">
-                        <button class="btn btn-outline-light btn-sm" onclick="showAdmin()">🔐 Admin</button>
-                    </li>
-                </ul>
-            </div>
+    <header class="bg-blue-900 text-white p-4 flex justify-between items-center shadow-md sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <h1 class="text-xl font-bold tracking-tighter uppercase italic">ST Study Hub</h1>
+            <span class="bg-yellow-500 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded">TS CONSTABLE & SUB-ENG</span>
         </div>
-    </nav>
-
-    <section class="hero">
-        <div class="container hero-content">
-            <h1 class="display-1">Station Thanda</h1>
-            <p>Empowering our community through digital transparency and easy access to services.</p>
-            <div class="mt-4">
-                <a href="#services" class="btn btn-primary btn-lg px-5 py-3 rounded-pill me-3">Our Services</a>
-                <a href="#contact" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">Get Help</a>
-            </div>
+        <div class="flex items-center gap-4">
+            <button class="text-sm font-bold border-b-2 border-yellow-400">English</button>
+            <button class="text-sm opacity-70 hover:opacity-100">తెలుగు</button>
         </div>
-    </section>
+    </header>
 
-    <div class="container" id="news">
-        <div class="news-container shadow">
-            <h3 class="section-title"><i class="bi bi-megaphone-fill"></i> Live Job & News Alerts</h3>
-            <div id="news-list">
-                <div class="text-center py-5">
-                    <div class="spinner-border text-primary"></div>
-                    <p class="mt-2">Loading Live Updates...</p>
+    <div class="flex flex-1 overflow-hidden">
+        <aside class="w-64 bg-white border-r hidden md:block overflow-y-auto">
+            <div class="p-4 border-b font-bold text-gray-500 text-xs uppercase">Subjects</div>
+            <nav class="p-2 space-y-1">
+                <a href="#" onclick="loadCategory('Arithmetic')" class="sidebar-link flex items-center p-3 rounded-lg text-sm font-semibold"><i class="fa fa-calculator mr-3"></i> Arithmetic</a>
+                <a href="#" onclick="loadCategory('Reasoning')" class="sidebar-link flex items-center p-3 rounded-lg text-sm font-semibold"><i class="fa fa-brain mr-3"></i> Reasoning</a>
+                <a href="#" onclick="loadCategory('Science')" class="sidebar-link flex items-center p-3 rounded-lg text-sm font-semibold"><i class="fa fa-flask mr-3"></i> General Science</a>
+                <a href="#" onclick="loadCategory('TS History')" class="sidebar-link flex items-center p-3 rounded-lg text-sm font-semibold"><i class="fa fa-landmark mr-3"></i> Telangana History</a>
+                <a href="#" onclick="loadCategory('Indian History')" class="sidebar-link flex items-center p-3 rounded-lg text-sm font-semibold"><i class="fa fa-history mr-3"></i> Indian History</a>
+                <a href="#" onclick="loadCategory('Static GK')" class="sidebar-link flex items-center p-3 rounded-lg text-sm font-semibold"><i class="fa fa-globe mr-3"></i> Static GK</a>
+                <a href="#" onclick="loadCategory('Current Affairs')" class="sidebar-link flex items-center p-3 rounded-lg text-sm font-semibold"><i class="fa fa-bolt mr-3"></i> Current Affairs</a>
+                <div class="p-4 border-b font-bold text-gray-500 text-xs uppercase mt-4">NPDCL Special</div>
+                <a href="#" onclick="loadCategory('Sub Engineer')" class="sidebar-link flex items-center p-3 rounded-lg text-sm font-semibold bg-blue-50 text-blue-800 border-l-4 border-blue-800"><i class="fa fa-bolt mr-3"></i> Sub-Engineer (Elec)</a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 overflow-y-auto p-4 md:p-8 bg-gray-50">
+            <div id="content-header" class="mb-6">
+                <h2 id="subject-title" class="text-2xl font-bold text-gray-800">Arithmetic Practice</h2>
+                <p class="text-sm text-gray-500">Free Mock Test Questions for TS Constable & TSNPDCL Exams</p>
+            </div>
+
+            <div id="mcq-container">
                 </div>
+        </main>
+
+        <aside class="w-80 bg-white border-l hidden lg:flex flex-col">
+            <div class="p-4 bg-blue-800 text-white font-bold flex justify-between items-center">
+                <span>Live Discussion</span>
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
             </div>
-        </div>
+            <div class="chat-window p-4 flex-1 space-y-4 text-sm" id="chat-box">
+                <div class="bg-gray-100 p-2 rounded"><strong>Ravi:</strong> What is the cutoff for NPDCL?</div>
+                <div class="bg-gray-100 p-2 rounded"><strong>Anjali:</strong> Focus on Power Systems for Sub Eng.</div>
+                <div class="bg-blue-100 p-2 rounded text-blue-900 border-l-4 border-blue-500"><strong>Admin:</strong> New Current Affairs PDF uploaded!</div>
+            </div>
+            <div class="p-4 border-t flex gap-2">
+                <input type="text" id="chat-input" placeholder="Ask a question..." class="flex-1 p-2 border rounded text-xs">
+                <button onclick="sendMessage()" class="bg-blue-700 text-white px-3 py-1 rounded text-xs">Send</button>
+            </div>
+        </aside>
     </div>
 
-    <section class="container py-5 mt-5">
-        <div class="row g-4 text-center">
-            <div class="col-md-3">
-                <div class="custom-card">
-                    <h2 class="fw-bold text-primary">3,200</h2>
-                    <p class="text-muted mb-0">Total Population</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="custom-card">
-                    <h2 class="fw-bold text-success">85%</h2>
-                    <p class="text-muted mb-0">Literacy Rate</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="custom-card">
-                    <h2 class="fw-bold text-info">1,100</h2>
-                    <p class="text-muted mb-0">Farmer Families</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="custom-card">
-                    <h2 class="fw-bold text-warning">24/7</h2>
-                    <p class="text-muted mb-0">Digital Help</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="container py-5">
-        <h2 class="section-title">Citizen Portals</h2>
-        <div class="row g-4" id="services-grid">
-            </div>
-    </section>
-
-    <section id="village-info" class="container py-5">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h2 class="section-title">About Our Village</h2>
-                <p>Station Thanda is a progressive village committed to digital transformation. Under the initiative of **@infobypawarsachin**, we aim to bring every government service directly to the fingertips of our residents.</p>
-                <ul class="list-unstyled mt-4">
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Free Wi-Fi at Gram Panchayat</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Digital Land Record Assistance</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Immediate Job Notifications</li>
-                </ul>
-            </div>
-            <div class="col-md-6 text-center">
-                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb75ec4e?q=80&w=800" class="img-fluid rounded-5 shadow-lg" alt="Village Development">
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="container py-5">
-        <h2 class="section-title text-center">Emergency & Support</h2>
-        <div class="row g-4 justify-content-center mt-3">
-            <div class="col-md-4">
-                <div class="custom-card text-center">
-                    <i class="bi bi-telephone-fill fs-1 text-danger"></i>
-                    <h4 class="mt-3">Police Control</h4>
-                    <p class="display-6 fw-bold">100</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="custom-card text-center">
-                    <i class="bi bi-hospital-fill fs-1 text-primary"></i>
-                    <h4 class="mt-3">Ambulance</h4>
-                    <p class="display-6 fw-bold">108</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="custom-card text-center">
-                    <i class="bi bi-envelope-fill fs-1 text-warning"></i>
-                    <h4 class="mt-3">Email Support</h4>
-                    <p class="fw-bold">infobypawarsachin@gmail.com</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-4">
-                    <h5 class="mb-4">Station Thanda Hub</h5>
-                    <p>Building a digital bridge between government and citizens. Access all Telangana state services and local news in one portal.</p>
-                </div>
-                <div class="col-lg-2">
-                    <h5>Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="footer-link">Home</a></li>
-                        <li><a href="#services" class="footer-link">Services</a></li>
-                        <li><a href="#news" class="footer-link">News</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h5>Govt Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="https://www.telangana.gov.in" class="footer-link">TS Government</a></li>
-                        <li><a href="https://dharani.telangana.gov.in" class="footer-link">Dharani Portal</a></li>
-                        <li><a href="https://ts.meeseva.telangana.gov.in" class="footer-link">MeeSeva</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h5>Connect</h5>
-                    <div class="d-flex gap-3 fs-4 mt-3">
-                        <i class="bi bi-facebook cursor-pointer"></i>
-                        <i class="bi bi-twitter"></i>
-                        <i class="bi bi-whatsapp"></i>
-                        <i class="bi bi-youtube"></i>
-                    </div>
-                </div>
-            </div>
-            <hr class="mt-5 mb-4 border-secondary">
-            <div class="text-center small">
-                © 2025 Station Thanda Digital Hub | Created by InfoByPawarSachin
-            </div>
-        </div>
+    <footer class="md:hidden bg-white border-t flex justify-around p-2 sticky bottom-0 z-50">
+        <button onclick="loadCategory('TS History')" class="flex flex-col items-center text-xs"><i class="fa fa-map text-blue-700"></i><span>TS</span></button>
+        <button onclick="loadCategory('Arithmetic')" class="flex flex-col items-center text-xs"><i class="fa fa-calculator text-blue-700"></i><span>Arith</span></button>
+        <button onclick="loadCategory('Sub Engineer')" class="flex flex-col items-center text-xs"><i class="fa fa-bolt text-blue-700"></i><span>NPDCL</span></button>
+        <button onclick="alert('Chat hidden on mobile')" class="flex flex-col items-center text-xs"><i class="fa fa-comments text-blue-700"></i><span>Chat</span></button>
     </footer>
 
-    <div id="adminPanel">
-        <div class="admin-box">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3>🛠 Village Control Panel</h3>
-                <button class="btn-close" onclick="closeAdmin()"></button>
-            </div>
-            
-            <div id="adminAuth">
-                <div class="mb-3">
-                    <label>Admin Password</label>
-                    <input type="password" id="adminPass" class="form-control" placeholder="Default is 1234">
-                </div>
-                <button class="btn btn-primary w-100" onclick="loginAdmin()">Access Dashboard</button>
-            </div>
-
-            <div id="adminControls" style="display: none;">
-                <ul class="nav nav-tabs mb-3" id="adminTabs">
-                    <li class="nav-item"><a class="nav-link active" href="#" onclick="switchTab('serv')">Manage Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="switchTab('news')">Local Announcements</a></li>
-                </ul>
-                
-                <div id="tab-serv">
-                    <h5>Add New Service</h5>
-                    <input type="text" id="sName" class="form-control mb-2" placeholder="Service Name (e.g. Voter ID)">
-                    <input type="text" id="sIcon" class="form-control mb-2" placeholder="Icon Class (e.g. bi-person)">
-                    <input type="text" id="sUrl" class="form-control mb-2" placeholder="Website Link">
-                    <button class="btn btn-success" onclick="saveService()">Add to Portal</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // --- THEME MANAGEMENT ---
-        function toggleTheme() {
-            const b = document.body;
-            const current = b.getAttribute('data-theme');
-            const target = current === 'light' ? 'dark' : 'light';
-            b.setAttribute('data-theme', target);
-            document.getElementById('tBtn').innerHTML = target === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
-            localStorage.setItem('siteTheme', target);
-        }
-        // Load preference
-        if(localStorage.getItem('siteTheme') === 'dark') toggleTheme();
+        // QUESTION DATABASE (Auto-generate structure)
+        const questionBank = {
+            "Arithmetic": [
+                { q: "If a person sells an article at 10% profit, the ratio of CP to SP is?", a: "10:11", o: ["9:10", "10:11", "11:10", "10:9"] },
+                { q: "Average of first 50 natural numbers is?", a: "25.5", o: ["25.0", "25.5", "26.0", "24.5"] }
+            ],
+            "Sub Engineer": [
+                { q: "The transformer oil used in transformers provide?", a: "Both Insulation and Cooling", o: ["Insulation only", "Cooling only", "Lubrication", "Both Insulation and Cooling"] },
+                { q: "In a DC generator, the brushes are made of?", a: "Carbon", o: ["Copper", "Carbon", "Aluminum", "Silver"] }
+            ],
+            "TS History": [
+                { q: "Who was the founder of the Kakatiya Dynasty?", a: "Gunda I", o: ["Prolla II", "Gunda I", "Ganapati Deva", "Rudra Deva"] }
+            ]
+        };
 
-        // --- ADMIN LOGIC ---
-        function showAdmin() { document.getElementById('adminPanel').style.display = 'block'; }
-        function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
-        
-        function loginAdmin() {
-            const pass = document.getElementById('adminPass').value;
-            if(pass === "1234") {
-                document.getElementById('adminAuth').style.display = 'none';
-                document.getElementById('adminControls').style.display = 'block';
-            } else { alert("Access Denied!"); }
-        }
+        function loadCategory(cat) {
+            const container = document.getElementById('mcq-container');
+            const title = document.getElementById('subject-title');
+            container.innerHTML = ''; // Clear current
+            title.innerText = cat + " MCQs";
 
-        // --- DATA MANAGEMENT ---
-        const defaultServices = [
-            { name: "Dharani", icon: "bi-map", url: "https://dharani.telangana.gov.in" },
-            { name: "MeeSeva", icon: "bi-pc-display", url: "https://ts.meeseva.telangana.gov.in" },
-            { name: "Ration Card", icon: "bi-card-list", url: "https://epds.telangana.gov.in" },
-            { name: "Pension", icon: "bi-person-heart", url: "https://www.aasara.telangana.gov.in" }
-        ];
+            const questions = questionBank[cat] || [];
+            if(questions.length === 0) {
+                container.innerHTML = `<p class='text-gray-400 italic'>Loading more questions for ${cat}...</p>`;
+                return;
+            }
 
-        function renderServices() {
-            let data = JSON.parse(localStorage.getItem('vServices')) || defaultServices;
-            const grid = document.getElementById('services-grid');
-            grid.innerHTML = data.map(s => `
-                <div class="col-md-3">
-                    <a href="${s.url}" target="_blank" class="custom-card">
-                        <div class="icon-box"><i class="bi ${s.icon}"></i></div>
-                        <h4>${s.name}</h4>
-                        <p class="text-muted small">Official Government Access</p>
-                        <span class="btn btn-link p-0 fw-bold">Open Portal →</span>
-                    </a>
-                </div>
-            `).join('');
-        }
-
-        function saveService() {
-            let data = JSON.parse(localStorage.getItem('vServices')) || defaultServices;
-            data.push({
-                name: document.getElementById('sName').value,
-                icon: document.getElementById('sIcon').value,
-                url: document.getElementById('sUrl').value
+            questions.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "mcq-card";
+                card.innerHTML = `
+                    <p class="font-bold text-gray-800 text-lg">Q${index+1}. ${item.q}</p>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                        ${item.o.map(opt => `<button class="option-btn" onclick="checkAns(this, '${item.a}')">${opt}</button>`).join('')}
+                    </div>
+                    <button onclick="this.nextElementSibling.style.display='block'" class="mt-4 text-xs font-bold text-blue-600 uppercase tracking-widest"><i class="fa fa-eye"></i> View Answer</button>
+                    <div class="ans-box bg-green-50 text-green-700 mt-2 p-2 rounded">Correct Answer: ${item.a}</div>
+                `;
+                container.appendChild(card);
             });
-            localStorage.setItem('vServices', JSON.stringify(data));
-            renderServices();
-            alert("Service Added Successfully!");
         }
 
-        // --- LIVE NEWS FETCH (Google News RSS via Proxy) ---
-        async function fetchLiveNews() {
-            const newsList = document.getElementById('news-list');
-            const rssUrl = "https://news.google.com/rss/search?q=telangana+government+jobs+alerts&hl=en-IN&gl=IN&ceid=IN:en";
-            
-            try {
-                const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`);
-                const data = await res.json();
-                const parser = new DOMParser();
-                const xml = parser.parseFromString(data.contents, "text/xml");
-                const items = xml.querySelectorAll("item");
-                
-                let html = '';
-                items.forEach((item, i) => {
-                    if(i < 6) {
-                        const title = item.querySelector("title").textContent;
-                        const link = item.querySelector("link").textContent;
-                        const date = new Date(item.querySelector("pubDate").textContent).toLocaleDateString();
-                        html += `
-                            <div class="news-ticker-item">
-                                <div class="news-date">${date}</div>
-                                <div class="flex-grow-1 mx-3 fw-semibold">${title}</div>
-                                <a href="${link}" target="_blank" class="btn btn-outline-primary btn-sm rounded-pill">View</a>
-                            </div>
-                        `;
-                    }
-                });
-                newsList.innerHTML = html;
-            } catch (e) {
-                newsList.innerHTML = '<p class="text-center text-danger">Temporary News Sync Issue. Please check back later.</p>';
+        function checkAns(btn, correct) {
+            if(btn.innerText === correct) {
+                btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+            } else {
+                btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
             }
         }
 
-        // Init
-        renderServices();
-        fetchLiveNews();
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const chatBox = document.getElementById('chat-box');
+            if(input.value.trim() !== "") {
+                const msg = document.createElement('div');
+                msg.className = "bg-blue-50 p-2 rounded self-end border-r-4 border-blue-500";
+                msg.innerHTML = `<strong>You:</strong> ${input.value}`;
+                chatBox.appendChild(msg);
+                input.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        // Initialize with default
+        window.onload = () => loadCategory('Arithmetic');
     </script>
 </body>
-          </html>
+</html>
 
